@@ -1,3 +1,4 @@
+import { makeParsed } from "../functions/makeParsed";
 import { Parser, Subline } from "../types";
 import { parseSubline } from "./parseSubline";
 
@@ -7,16 +8,10 @@ export const parseSublines: ParseSublines = (s) => {
   const { head: firstLine, rest: afterFirstLine } = parseSubline(s);
 
   if (afterFirstLine == "" || !afterFirstLine.startsWith("|-")) {
-    return {
-      head: [firstLine],
-      rest: afterFirstLine,
-    };
+    return makeParsed([firstLine], afterFirstLine);
   }
 
   const { head: nextLine, rest: afterNextLine } = parseSublines(afterFirstLine);
 
-  return {
-    head: [firstLine].concat(nextLine),
-    rest: afterNextLine,
-  };
+  return makeParsed([firstLine].concat(nextLine), afterNextLine);
 };

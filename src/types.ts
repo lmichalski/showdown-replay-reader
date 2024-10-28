@@ -9,7 +9,7 @@ export type Cell = string;
 
 export type Subline = {
   label: string;
-  body: Cell[];
+  cells: Cell[];
 };
 
 export type ReplayLine = {
@@ -17,3 +17,5 @@ export type ReplayLine = {
   cells: Cell[];
   sublines: Subline[];
 };
+
+export type Tab = { t: string; lines: ReplayLine[] };

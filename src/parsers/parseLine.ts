@@ -7,7 +7,7 @@ import { parseSublines } from "./parseSublines";
 
 type ParseLine = Parser<ReplayLine>;
 
-const parseLine: ParseLine = (s) => {
+export const parseLine: ParseLine = (s) => {
   const { head: label, rest: afterLabel } = parseCell(s);
 
   if (afterLabel == "") {
@@ -21,7 +21,7 @@ const parseLine: ParseLine = (s) => {
     );
   }
 
-  if (afterLabel == "\n") {
+  if (afterLabel.startsWith("\n")) {
     const afterNewline = takeNewline(afterLabel);
     return makeParsed(
       {
@@ -34,6 +34,7 @@ const parseLine: ParseLine = (s) => {
   }
 
   const { head: lineBody, rest: afterBody } = parseLineBody(afterLabel);
+
   const afterNewline = takeNewline(afterBody);
 
   if (!afterNewline.startsWith("|-")) {
@@ -43,7 +44,7 @@ const parseLine: ParseLine = (s) => {
         cells: lineBody,
         sublines: [],
       },
-      afterBody
+      afterNewline
     );
   }
 

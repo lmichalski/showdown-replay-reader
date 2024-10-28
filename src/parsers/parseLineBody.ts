@@ -7,7 +7,7 @@ type ParseLineBody = Parser<string[]>;
 export const parseLineBody: ParseLineBody = (s) => {
   const { head: firstCell, rest: afterFirstCell } = parseCell(s);
 
-  if (afterFirstCell == "" || afterFirstCell == "\n") {
+  if (afterFirstCell == "" || afterFirstCell.startsWith("\n")) {
     return makeParsed([firstCell], afterFirstCell);
   }
 
