@@ -1,4 +1,6 @@
-import { ParseDelimeter } from "./ParseDelimeter";
+import { Parser } from "../types";
+
+type ParseDelimeter = (delimeter: string) => Parser<string>;
 
 export const parseDelimeterToRest: ParseDelimeter = (d) => (s) =>
   s.indexOf(d) == -1
