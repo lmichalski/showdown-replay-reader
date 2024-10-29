@@ -4,7 +4,7 @@ import {
   markGen,
   markTier,
 } from "../rows/markNonduplicateRowLabel";
-import { markPlayersAndPokes } from "../rows/markPlayersAndPokes";
+import { markPlayers } from "../rows/markPlayers";
 import { markPokes } from "../rows/markPokes";
 import { markRules } from "../rows/markRules";
 
@@ -16,13 +16,15 @@ type MarkTurnZero = (tz: ReplayLine[]) => {
     p1: {
       name: string;
       avatar: string;
-      pokes: Poke[];
     };
     p2: {
       name: string;
       avatar: string;
-      pokes: Poke[];
     };
+  };
+  pokes: {
+    p1: { pokes: Poke[] };
+    p2: { pokes: Poke[] };
   };
   gen: {
     value: string;
@@ -42,7 +44,8 @@ export const markTurnZero: MarkTurnZero = (tZero) => {
   }
 
   const gametype = markGametype(tZero);
-  const players = markPlayersAndPokes(tZero);
+  const players = markPlayers(tZero);
+  const pokes = markPokes(tZero);
   const gen = markGen(tZero);
   const tier = markTier(tZero);
   const rules = markRules(tZero);
@@ -50,6 +53,7 @@ export const markTurnZero: MarkTurnZero = (tZero) => {
   return {
     gametype,
     players,
+    pokes,
     gen,
     tier,
     rules,

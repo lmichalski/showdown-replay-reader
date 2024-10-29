@@ -1,6 +1,9 @@
 import { Poke } from "../../types";
 
-type ReadGender = (poke: string) => Poke;
+type ReadGender = (poke: string) => {
+  species: string;
+  gender: string;
+};
 
 export const readGender: ReadGender = (s) => {
   const splitString = s.split(", ");

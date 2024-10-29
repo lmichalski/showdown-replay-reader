@@ -3,7 +3,8 @@ import { markPlayers } from "./src/marking/rows/markPlayers";
 import { markPokes } from "./src/marking/rows/markPokes";
 import { markRules } from "./src/marking/rows/markRules";
 import { markTurnZero } from "./src/marking/turns/markTurnZero";
-import { readGender } from "./src/marking/rows/readGender";
+import { readGender } from "./src/marking/functions/readGender";
+import { markSwitch } from "./src/marking/rows/markSwitch";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
@@ -109,6 +110,22 @@ var turnZero = [
   { label: "", cells: [], sublines: [] },
 ];
 
+var turnOne = [
+  { label: "start", cells: [], sublines: [] },
+  {
+    label: "switch",
+    cells: ["p1a: Azelf", "Azelf", "100/100"],
+    sublines: [],
+  },
+  {
+    label: "switch",
+    cells: ["p2a: Kill Bill", "Samurott-Hisui, M", "100/100"],
+    sublines: [],
+  },
+  { label: "turn", cells: ["1"], sublines: [] },
+  { label: "", cells: [], sublines: [] },
+];
+
 // ---------------
 // test: markGametype
 // ---------------
@@ -153,3 +170,9 @@ console.log(markTurnZero(turnZero)["players"]["p1"]);
 console.log(markTurnZero(turnZero)["players"]["p2"]);
 console.log(markTurnZero(turnZero)["tier"]);
 console.log(markTurnZero(turnZero)["rules"]);
+
+// ---------------
+// test: markSwitch
+// ---------------
+console.log(markSwitch(turnOne[1]));
+console.log(markSwitch(turnOne[2]));

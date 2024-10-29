@@ -1,5 +1,5 @@
 import { Poke, ReplayLine } from "../../types";
-import { readGender } from "./readGender";
+import { markPoke } from "./markPoke";
 
 // EXAMPLE
 // |poke|p1|Gouging Fire|
@@ -18,19 +18,17 @@ export const markPokes: MarkPokes = (tz) => {
 
   if (pokes.length == 0) {
     throw new Error(
-      `TurnZero should contain at least one line containing 'poke': ${pokes}`
+      `TurnZero should contain at least one line containing 'poke': ${tz}`
     );
   }
 
   const p1Pokes = pokes
     .filter((line) => line["cells"][0] == "p1")
-    .map((line) => line["cells"][1])
-    .map((poke) => readGender(poke));
+    .map((poke) => markPoke(poke)["poke"]);
 
   const p2Pokes = pokes
-    .filter((poke) => poke["cells"][0] == "p2")
-    .map((line) => line["cells"][1])
-    .map((poke) => readGender(poke));
+    .filter((line) => line["cells"][0] == "p2")
+    .map((poke) => markPoke(poke)["poke"]);
 
   return {
     p1: {

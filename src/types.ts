@@ -23,4 +23,6 @@ export type Turn = { t: string; lines: ReplayLine[] };
 export type Poke = {
   species: string;
   gender: string;
+  nickname: string;
+  health: number;
 };
