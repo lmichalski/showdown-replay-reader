@@ -6,7 +6,6 @@ import { parseReplay } from "./src/parsers/parseReplay";
 import { parseTurn } from "./src/parsers/parseTurn";
 import { parseTurnBody } from "./src/parsers/parseTurnBody";
 import { parseTurnHead } from "./src/parsers/parseTurnHead";
-import { Turn } from "./src/types";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;

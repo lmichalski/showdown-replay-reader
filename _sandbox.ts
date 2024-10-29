@@ -11,4 +11,4 @@ var parsedReplay = parsedLog["head"];
 //   console.log(parsedLog["head"][i]["lines"]);
 // }
 
-console.log(parsedReplay[1]["lines"]);
+console.log(parsedReplay[2]["lines"]);

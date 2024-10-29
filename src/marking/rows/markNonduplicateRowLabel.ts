@@ -30,5 +30,3 @@ export const markGen = markNonduplicateSingleCellRowLabel("gen");
 // Tier
 // eg. |tier|[Gen 9] Tera Preview NatDex Draft
 export const markTier = markNonduplicateSingleCellRowLabel("tier");
-
-//

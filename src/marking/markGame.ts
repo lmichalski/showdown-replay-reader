@@ -1,5 +1,5 @@
 import { Turn } from "../types";
-import { markGametype } from "./turn_zero/markNonduplicateRowLabel";
+import { markGametype } from "./rows/markNonduplicateRowLabel";
 
 const markGame = (replay: Turn[]) => {
   const [removed, ...newArr] = replay;

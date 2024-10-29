@@ -1,9 +1,9 @@
-import { markGametype } from "./src/marking/turn_zero/markNonduplicateRowLabel";
-import { markPlayers } from "./src/marking/turn_zero/markPlayers";
-import { markPokes } from "./src/marking/turn_zero/markPokes";
-import { markRules } from "./src/marking/turn_zero/markRules";
-import { markTurnZero } from "./src/marking/turn_zero/markTurnZero";
-import { readGender } from "./src/marking/turn_zero/readGender";
+import { markGametype } from "./src/marking/rows/markNonduplicateRowLabel";
+import { markPlayers } from "./src/marking/rows/markPlayers";
+import { markPokes } from "./src/marking/rows/markPokes";
+import { markRules } from "./src/marking/rows/markRules";
+import { markTurnZero } from "./src/marking/turns/markTurn0";
+import { readGender } from "./src/marking/rows/readGender";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
