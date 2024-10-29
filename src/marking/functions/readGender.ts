@@ -8,9 +8,10 @@ type ReadGender = (poke: string) => {
 export const readGender: ReadGender = (s) => {
   const splitString = s.split(", ");
 
-  if (splitString.length != 1 && splitString.length != 2) {
+  if (![1, 2, 3].includes(splitString.length)) {
     throw new Error("string cannot be a Pokemon string: " + s);
   }
+
   if (splitString.length == 1) {
     return {
       species: splitString[0],

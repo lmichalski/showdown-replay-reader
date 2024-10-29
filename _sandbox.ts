@@ -3,7 +3,7 @@ import { parseReplay } from "./src/parsers/parseReplay";
 
 var parsedLog = parseReplay(sample_replay["log"]);
 
-var [removed, ...parsedReplay] = parsedLog["head"];
+var parsedReplay = parsedLog["head"];
 
 // for (let i = 0; i < parsedLog["head"].length; i++) {
 //   console.log("--------------------\nTurn: ");
@@ -11,8 +11,8 @@ var [removed, ...parsedReplay] = parsedLog["head"];
 //   console.log(parsedLog["head"][i]["lines"]);
 // }
 
-console.log(parsedReplay[1]["lines"]);
-console.log(parsedReplay[2]["lines"]);
-console.log(parsedReplay[3]["lines"]);
-console.log(parsedReplay[4]["lines"]);
-console.log(parsedReplay[5]["lines"]);
+console.log(parsedReplay[0]);
+console.log(parsedReplay[1]);
+console.log(parsedReplay[2]);
+console.log(parsedReplay[3]);
+console.log(parsedReplay[4]);

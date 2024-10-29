@@ -8,11 +8,19 @@ import { markSwitch } from "./src/marking/rows/markSwitch";
 import { markTurnOne } from "./src/marking/turns/markTurnOne";
 import { splitNicknameFromString } from "./src/marking/functions/splitNicknameFromSwitch";
 import { markDamage } from "./src/marking/sublines/markDamage";
+import { sample_replay } from "./_sample";
+import { parseReplay } from "./src/parsers/parseReplay";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
 
+var parsedLog = parseReplay(sample_replay["log"]);
+var parsedReplay = parsedLog["head"];
+
 var turnZero = [
+  { label: "j", cells: ["☆Glumlee"], sublines: [] },
+  { label: "j", cells: ["☆2n2plus"], sublines: [] },
+  { label: "t:", cells: ["1721091573"], sublines: [] },
   { label: "gametype", cells: ["singles"], sublines: [] },
   {
     label: "player",
@@ -188,6 +196,14 @@ console.log(newSect("markSwitch"));
 
 console.log(markSwitch(turnOne[1]));
 console.log(markSwitch(turnOne[2]));
+console.log(markSwitch(turnOne[2]));
+
+// 17: |switch|p2a: Despicable Me|Slurpuff, F, shiny|100/100
+// 21: |switch|p2a: Shogun|Kommo-o, M|64/100
+var a = parsedReplay[16]["lines"][10];
+var b = parsedReplay[21]["lines"][2];
+console.log(markSwitch(a));
+console.log(markSwitch(b));
 
 // ---------------
 // test: splitNicknameFromSwitch

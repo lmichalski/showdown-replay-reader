@@ -6,7 +6,7 @@ type SplitNicknameFromSwitch = (s: string) => {
 export const splitNicknameFromString: SplitNicknameFromSwitch = (s) => {
   const splitString = s.split(": ");
 
-  if (splitString.length != 1 && splitString.length != 2) {
+  if (![1, 2].includes(splitString.length)) {
     throw new Error("string cannot be read as a switch-row pokemon" + s);
   }
 

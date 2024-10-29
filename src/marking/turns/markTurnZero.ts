@@ -39,8 +39,8 @@ type MarkTurnZero = (tz: ReplayLine[]) => {
 };
 
 export const markTurnZero: MarkTurnZero = (tZero) => {
-  if (tZero[0]["label"] != "gametype") {
-    throw new Error('Turn zero should start with a "gametype" line');
+  if (tZero[0]["label"] != "j" || tZero[1]["label"] != "j") {
+    throw new Error('Turn zero should start with two "jone" lines');
   }
 
   const gametype = markGametype(tZero);
