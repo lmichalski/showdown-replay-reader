@@ -1,5 +1,5 @@
-import { sample_replay } from "./scripts/_sample";
-import { parseReplay } from "./src/parsers/parseReplay";
+import { sample_replay } from "./_sample";
+import { parseReplay } from "../src/parsers/parseReplay";
 
 var parsedLog = parseReplay(sample_replay["log"]);
 

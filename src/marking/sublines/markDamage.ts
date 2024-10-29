@@ -1,5 +1,5 @@
 import { Subline } from "../../types";
-import { splitNicknameFromString } from "../functions/splitNicknameFromSwitch";
+import { splitNicknameFromString } from "../../functions/splitNicknameFromSwitch";
 
 type MarkDamage = (subline: Subline) => {};
 

@@ -1,5 +1,5 @@
 import { ReplayLine } from "../../types";
-import { splitNicknameFromString } from "../functions/splitNicknameFromSwitch";
+import { splitNicknameFromString } from "../../functions/splitNicknameFromSwitch";
 import { markSwitch } from "../rows/markSwitch";
 
 type MarkTurnOne = (turnOne: ReplayLine[]) => {};

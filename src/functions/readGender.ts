@@ -1,4 +1,4 @@
-import { Poke } from "../../types";
+import { Poke } from "../types";
 
 type ReadGender = (poke: string) => {
   species: string;

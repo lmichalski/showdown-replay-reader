@@ -1,6 +1,6 @@
 import { Poke, ReplayLine } from "../../types";
-import { readGender } from "../functions/readGender";
-import { splitNicknameFromString } from "../functions/splitNicknameFromSwitch";
+import { readGender } from "../../functions/readGender";
+import { splitNicknameFromString } from "../../functions/splitNicknameFromSwitch";
 import { markSublines } from "../sublines/markSublines";
 
 type MarkSwitch = (line: ReplayLine) => {

@@ -1,12 +1,12 @@
 import { log } from "handlebars";
-import { sample_replay } from "./scripts/_sample";
-import { parseCell } from "./src/parsers/parseCell";
-import { parseLine } from "./src/parsers/parseLine";
-import { parseLineBody } from "./src/parsers/parseLineBody";
-import { parseReplay } from "./src/parsers/parseReplay";
-import { parseTurn } from "./src/parsers/parseTurn";
-import { parseTurnBody } from "./src/parsers/parseTurnBody";
-import { parseTurnHead } from "./src/parsers/parseTurnHead";
+import { sample_replay } from "./_sample";
+import { parseCell } from "../src/parsers/parseCell";
+import { parseLine } from "../src/parsers/parseLine";
+import { parseLineBody } from "../src/parsers/parseLineBody";
+import { parseReplay } from "../src/parsers/parseReplay";
+import { parseTurn } from "../src/parsers/parseTurn";
+import { parseTurnBody } from "../src/parsers/parseTurnBody";
+import { parseTurnHead } from "../src/parsers/parseTurnHead";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
