@@ -2,16 +2,16 @@ import { makeParsed } from "../functions/makeParsed";
 import { Parser, ReplayLine } from "../types";
 import { parseLine } from "./parseLine";
 
-type ParseTabBody = Parser<ReplayLine[]>;
+type ParseTurnBody = Parser<ReplayLine[]>;
 
-export const parseTabBody: ParseTabBody = (s) => {
+export const parseTurnBody: ParseTurnBody = (s) => {
   const { head: firstLine, rest: afterFirstLine } = parseLine(s);
 
   if (afterFirstLine == "" || afterFirstLine.startsWith("|t:|")) {
     return makeParsed([firstLine], afterFirstLine);
   }
 
-  const { head: nextLine, rest: afterNextLine } = parseTabBody(afterFirstLine);
+  const { head: nextLine, rest: afterNextLine } = parseTurnBody(afterFirstLine);
 
   return makeParsed([firstLine].concat(nextLine), afterNextLine);
 };

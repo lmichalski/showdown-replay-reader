@@ -1,16 +1,17 @@
-import { replay } from "./_sample";
+import { sample_replay } from "./_sample";
 import { parseCell } from "./src/parsers/parseCell";
 import { parseLine } from "./src/parsers/parseLine";
 import { parseLineBody } from "./src/parsers/parseLineBody";
 import { parseReplay } from "./src/parsers/parseReplay";
-import { parseTab } from "./src/parsers/parseTab";
-import { parseTabBody } from "./src/parsers/parseTabBody";
-import { parseTabHead } from "./src/parsers/parseTabHead";
+import { parseTurn } from "./src/parsers/parseTurn";
+import { parseTurnBody } from "./src/parsers/parseTurnBody";
+import { parseTurnHead } from "./src/parsers/parseTurnHead";
+import { Turn } from "./src/types";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
 
-var loggy = replay["log"];
+var loggy = sample_replay["log"];
 var subLog1 = loggy.substring(0, 100);
 var subLog2 = loggy.substring(24, 2000);
 
@@ -51,46 +52,46 @@ console.log(c1);
 console.log(c2);
 
 // ---------------
-// test: parseTabHead
+// test: parseTurnHead
 // ---------------
-console.log(newSect("parseTabHead"));
-var d1 = parseTabHead(subLog1);
-var d2 = parseTabHead(subLog2);
+console.log(newSect("parseTurnHead"));
+var d1 = parseTurnHead(subLog1);
+var d2 = parseTurnHead(subLog2);
 
 console.log(d1);
 console.log(d2);
 
 // ---------------
-// test: parseTabBody
+// test: parseTurnBody
 // ---------------
-console.log(newSect("parseTabBody"));
+console.log(newSect("parseTurnBody"));
 
-var e1 = parseTabBody(d1["rest"]);
+var e1 = parseTurnBody(d1["rest"]);
 console.log(e1);
 
-var e2 = parseTabBody(d2["rest"]);
+var e2 = parseTurnBody(d2["rest"]);
 console.log(e2);
 
 // ---------------
 // test: parseBody
 // ---------------
 console.log(newSect("parseBody"));
-var f1 = parseTab(subLog1);
+var f1 = parseTurn(subLog1);
 console.log(f1["head"]);
 
-var f2 = parseTab(subLog2);
+var f2 = parseTurn(subLog2);
 console.log(f2["head"]);
 
 // ---------------
 // test: parseReplay
 // ---------------
 var parsedLog = parseReplay(loggy);
-console.log(newSect("parseTab"));
+console.log(newSect("parseTurn"));
 console.log(parsedLog["head"]);
 console.log(parsedLog["rest"]);
 
 for (let i = 0; i < parsedLog["head"].length; i++) {
-  console.log("--------------------\nTab: ");
+  console.log("--------------------\nTurn: ");
   console.log("t: " + parsedLog["head"][i]["t"]);
   console.log(parsedLog["head"][i]["lines"]);
 }

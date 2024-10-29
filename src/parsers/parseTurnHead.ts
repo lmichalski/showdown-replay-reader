@@ -2,9 +2,9 @@ import { makeParsed } from "../functions/makeParsed";
 import { Parser } from "../types";
 import { parseLine } from "./parseLine";
 
-type ParseTabHead = Parser<string>;
+type ParseTurnHead = Parser<string>;
 
-export const parseTabHead: ParseTabHead = (s) => {
+export const parseTurnHead: ParseTurnHead = (s) => {
   if (!s.startsWith("|t:|")) {
     return makeParsed(`none (generated: ${Date.now()})`, s);
   }

@@ -1,22 +1,23 @@
-import { Parser, Tab } from "../types";
-import { parseTab } from "./parseTab";
+import { Parser, Turn } from "../types";
+import { parseTurn } from "./parseTurn";
 
-type ParseReplay = Parser<Tab[]>;
+type ParseReplay = Parser<Turn[]>;
 
 export const parseReplay: ParseReplay = (s) => {
-  const { head: firstTab, rest: afterFirstTab } = parseTab(s);
+  const { head: firstTurn, rest: afterFirstTurn } = parseTurn(s);
 
-  if (afterFirstTab == "") {
+  if (afterFirstTurn == "") {
     return {
-      head: [firstTab],
-      rest: afterFirstTab,
+      head: [firstTurn],
+      rest: afterFirstTurn,
     };
   }
 
-  const { head: secondTab, rest: afterSecondTab } = parseReplay(afterFirstTab);
+  const { head: secondTurn, rest: afterSecondTurn } =
+    parseReplay(afterFirstTurn);
 
   return {
-    head: [firstTab].concat(secondTab),
-    rest: afterSecondTab,
+    head: [firstTurn].concat(secondTurn),
+    rest: afterSecondTurn,
   };
 };

@@ -1,5 +1,5 @@
-import { Tab } from "../types";
+import { Turn } from "../types";
 
-const markTab = (t: Tab) => {
+const markTurn = (t: Turn) => {
   for (let i = 0; i < t["lines"].length; i++) {}
 };

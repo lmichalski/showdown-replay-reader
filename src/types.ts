@@ -18,4 +18,9 @@ export type ReplayLine = {
   sublines: Subline[];
 };
 
-export type Tab = { t: string; lines: ReplayLine[] };
+export type Turn = { t: string; lines: ReplayLine[] };
+
+export type Poke = {
+  species: string;
+  gender: string;
+};

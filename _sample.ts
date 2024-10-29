@@ -1,4 +1,4 @@
-export const replay = {
+export const sample_replay = {
   id: "gen9terapreviewnatdexdraft-2161640773",
   format: "[Gen 9] Tera Preview NatDex Draft",
   players: ["Glumlee", "2n2plus"],
