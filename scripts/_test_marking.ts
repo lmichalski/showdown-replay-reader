@@ -1,15 +1,15 @@
-import { markGametype } from "./src/marking/rows/markNonduplicateRowLabel";
-import { markPlayers } from "./src/marking/rows/markPlayers";
-import { markPokes } from "./src/marking/rows/markPokes";
-import { markRules } from "./src/marking/rows/markRules";
-import { markTurnZero } from "./src/marking/turns/markTurnZero";
-import { readGender } from "./src/marking/functions/readGender";
-import { markSwitch } from "./src/marking/rows/markSwitch";
-import { markTurnOne } from "./src/marking/turns/markTurnOne";
-import { splitNicknameFromString } from "./src/marking/functions/splitNicknameFromSwitch";
-import { markDamage } from "./src/marking/sublines/markDamage";
+import { markGametype } from "../src/marking/rows/markNonduplicateRowLabel";
+import { markPlayers } from "../src/marking/rows/markPlayers";
+import { markPokes } from "../src/marking/rows/markPokes";
+import { markRules } from "../src/marking/rows/markRules";
+import { markTurnZero } from "../src/marking/turns/markTurnZero";
+import { readGender } from "../src/marking/functions/readGender";
+import { markSwitch } from "../src/marking/rows/markSwitch";
+import { markTurnOne } from "../src/marking/turns/markTurnOne";
+import { splitNicknameFromString } from "../src/marking/functions/splitNicknameFromSwitch";
+import { markDamage } from "../src/marking/sublines/markDamage";
 import { sample_replay } from "./_sample";
-import { parseReplay } from "./src/parsers/parseReplay";
+import { parseReplay } from "../src/parsers/parseReplay";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
