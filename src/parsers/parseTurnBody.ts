@@ -7,7 +7,7 @@ type ParseTurnBody = Parser<ReplayLine[]>;
 export const parseTurnBody: ParseTurnBody = (s) => {
   const { head: firstLine, rest: afterFirstLine } = parseLine(s);
 
-  if (afterFirstLine == "" || afterFirstLine.startsWith("|t:|")) {
+  if (afterFirstLine == "" || afterFirstLine.startsWith("|turn|")) {
     return makeParsed([firstLine], afterFirstLine);
   }
 

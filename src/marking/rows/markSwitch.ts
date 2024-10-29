@@ -1,6 +1,7 @@
 import { Poke, ReplayLine } from "../../types";
 import { readGender } from "../functions/readGender";
-import { splitNicknameFromSwitch } from "../functions/splitNicknameFromSwitch";
+import { splitNicknameFromString } from "../functions/splitNicknameFromSwitch";
+import { markSublines } from "../sublines/markSublines";
 
 type MarkSwitch = (line: ReplayLine) => {
   player: string;
@@ -13,15 +14,15 @@ export const markSwitch: MarkSwitch = (line) => {
     throw new Error(`not a switch line, cannot be marked: + ${line}`);
   }
 
-  const { player, pokeNickname } = splitNicknameFromSwitch(line["label"][0]);
-
-  const health = line["cells"][2].split("/");
-
+  const { player, pokeNickname } = splitNicknameFromString(line["cells"][0]);
   const { species, gender } = readGender(line["cells"][1]);
+  const health = line["cells"][2].split("/");
 
   if (health.length != 2) {
     throw new Error(`not a switch line, cannot be marked: + ${line}`);
   }
+
+  const sublines = markSublines(line["sublines"]);
 
   return {
     player: player,

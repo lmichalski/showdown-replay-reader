@@ -5,6 +5,9 @@ import { markRules } from "./src/marking/rows/markRules";
 import { markTurnZero } from "./src/marking/turns/markTurnZero";
 import { readGender } from "./src/marking/functions/readGender";
 import { markSwitch } from "./src/marking/rows/markSwitch";
+import { markTurnOne } from "./src/marking/turns/markTurnOne";
+import { splitNicknameFromString } from "./src/marking/functions/splitNicknameFromSwitch";
+import { markDamage } from "./src/marking/sublines/markDamage";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
@@ -126,6 +129,13 @@ var turnOne = [
   { label: "", cells: [], sublines: [] },
 ];
 
+var dmg1 = {
+  label: "-damage",
+  cells: ["p2a: Shogun", "94/100", "[from] Stealth Rock"],
+};
+var dmg2 = { label: "-damage", cells: ["p1a: Azelf", "0 fnt"] };
+var dmg3 = { label: "-damage", cells: ["p1a: Goodra", "43/100"] };
+
 // ---------------
 // test: markGametype
 // ---------------
@@ -174,5 +184,31 @@ console.log(markTurnZero(turnZero)["rules"]);
 // ---------------
 // test: markSwitch
 // ---------------
+console.log(newSect("markSwitch"));
+
 console.log(markSwitch(turnOne[1]));
 console.log(markSwitch(turnOne[2]));
+
+// ---------------
+// test: splitNicknameFromSwitch
+// ---------------
+console.log(newSect("splitNicknameFromSwitch"));
+
+console.log(turnOne[1]["cells"]);
+console.log(splitNicknameFromString(turnOne[1]["cells"][0]));
+
+// ---------------
+// test: markTurnOne
+// ---------------
+console.log(newSect("markTurnOne"));
+
+console.log(markTurnOne(turnOne));
+
+// ---------------
+// test: markDamage
+// ---------------
+console.log(newSect("markDamage"));
+
+console.log(markDamage(dmg1));
+console.log(markDamage(dmg2));
+console.log(markDamage(dmg3));

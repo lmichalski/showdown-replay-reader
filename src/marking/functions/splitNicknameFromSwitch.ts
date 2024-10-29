@@ -3,7 +3,7 @@ type SplitNicknameFromSwitch = (s: string) => {
   pokeNickname: string;
 };
 
-export const splitNicknameFromSwitch: SplitNicknameFromSwitch = (s) => {
+export const splitNicknameFromString: SplitNicknameFromSwitch = (s) => {
   const splitString = s.split(": ");
 
   if (splitString.length != 1 && splitString.length != 2) {
@@ -15,3 +15,5 @@ export const splitNicknameFromSwitch: SplitNicknameFromSwitch = (s) => {
     pokeNickname: splitString[1],
   };
 };
+
+// |switch|p1a: Azelf|Azelf|100/100

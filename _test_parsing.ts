@@ -1,3 +1,4 @@
+import { log } from "handlebars";
 import { sample_replay } from "./_sample";
 import { parseCell } from "./src/parsers/parseCell";
 import { parseLine } from "./src/parsers/parseLine";
@@ -65,17 +66,17 @@ console.log(d2);
 // ---------------
 console.log(newSect("parseTurnBody"));
 
-var e1 = parseTurnBody(d1["rest"]);
+var e1 = parseTurnBody(loggy.substring(0, 2000));
 console.log(e1);
 
 var e2 = parseTurnBody(d2["rest"]);
 console.log(e2);
 
 // ---------------
-// test: parseBody
+// test: parseTurn
 // ---------------
-console.log(newSect("parseBody"));
-var f1 = parseTurn(subLog1);
+console.log(newSect("parseTurn"));
+var f1 = parseTurn(loggy.substring(0, 2000));
 console.log(f1["head"]);
 
 var f2 = parseTurn(subLog2);
@@ -86,11 +87,9 @@ console.log(f2["head"]);
 // ---------------
 var parsedLog = parseReplay(loggy);
 console.log(newSect("parseTurn"));
-console.log(parsedLog["head"]);
-console.log(parsedLog["rest"]);
 
 for (let i = 0; i < parsedLog["head"].length; i++) {
-  console.log("--------------------\nTurn: ");
-  console.log("t: " + parsedLog["head"][i]["t"]);
+  console.log("--------------------\n");
+  console.log("Turn: " + parsedLog["head"][i]["turn"]);
   console.log(parsedLog["head"][i]["lines"]);
 }

@@ -12,7 +12,7 @@ export const parseTurn: ParseTurn = (s) => {
 
   return makeParsed(
     {
-      t: TurnHead,
+      turn: parseInt(TurnHead),
       lines: TurnBody,
     },
     afterBody
