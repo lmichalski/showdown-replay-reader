@@ -2,7 +2,7 @@ import { markGametype } from "./src/marking/rows/markNonduplicateRowLabel";
 import { markPlayers } from "./src/marking/rows/markPlayers";
 import { markPokes } from "./src/marking/rows/markPokes";
 import { markRules } from "./src/marking/rows/markRules";
-import { markTurnZero } from "./src/marking/turns/markTurn0";
+import { markTurnZero } from "./src/marking/turns/markTurnZero";
 import { readGender } from "./src/marking/rows/readGender";
 
 var newSect = (s: string) =>

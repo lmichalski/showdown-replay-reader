@@ -1,7 +1,7 @@
 import { Turn } from "../types";
 import { markGametype } from "./rows/markNonduplicateRowLabel";
 
-const markGame = (replay: Turn[]) => {
+export const markGame = (replay: Turn[]) => {
   const [removed, ...newArr] = replay;
 
   if (
