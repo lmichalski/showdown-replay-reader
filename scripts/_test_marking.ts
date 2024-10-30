@@ -10,6 +10,7 @@ import { splitNicknameFromString } from "../src/functions/splitNicknameFromSwitc
 import { markDamage } from "../src/marking/sublines/markDamage";
 import { sample_replay } from "./_sample";
 import { parseReplay } from "../src/parsers/parseReplay";
+import { markBoost } from "../src/marking/sublines/markBoost";
 
 var newSect = (s: string) =>
   `\n-------------------\n${s}\n-------------------\n`;
@@ -228,3 +229,17 @@ console.log(newSect("markDamage"));
 console.log(markDamage(dmg1));
 console.log(markDamage(dmg2));
 console.log(markDamage(dmg3));
+
+// ---------------
+// test: markBoost
+// ---------------
+console.log(newSect("markBoost"));
+
+var boost1 = { label: "-boost", cells: ["p1a: Azelf", "atk", "2"] };
+var boost2 = {
+  label: "-boost",
+  cells: ["p2a: Vendetta", "spa", "2", "[from] item: Weakness Policy"],
+};
+
+console.log(markBoost(boost1));
+console.log(markBoost(boost2));

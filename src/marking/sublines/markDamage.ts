@@ -1,7 +1,13 @@
 import { Subline } from "../../types";
 import { splitNicknameFromString } from "../../functions/splitNicknameFromSwitch";
 
-type MarkDamage = (subline: Subline) => {};
+type MarkDamage = (subline: Subline) => {
+  player: string;
+  event: string;
+  affectedPoke: string;
+  newHealth: number;
+  source: string;
+};
 
 export const markDamage: MarkDamage = (subline) => {
   if (subline["label"] != "-damage") {
@@ -34,10 +40,8 @@ export const markDamage: MarkDamage = (subline) => {
   return {
     player: player,
     event: event,
-    poke: {
-      nickname: pokeNickname,
-      health: parseInt(health[0]),
-    },
+    affectedPoke: pokeNickname,
+    newHealth: parseInt(health[0]),
     source: source,
   };
 };
