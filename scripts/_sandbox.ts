@@ -11,8 +11,11 @@ var parsedReplay = parsedLog["head"];
 //   console.log(parsedLog["head"][i]["lines"]);
 // }
 
-console.log(parsedReplay[0]);
-console.log(parsedReplay[1]);
-console.log(parsedReplay[2]);
-console.log(parsedReplay[3]);
-console.log(parsedReplay[4]);
+var a = parsedReplay.map((turn) => turn["lines"].map((line) => line["label"]));
+var a1 = a.concat.apply([], a);
+
+console.log(a1);
+
+var b = [...new Set(a1)];
+
+console.log(b);
