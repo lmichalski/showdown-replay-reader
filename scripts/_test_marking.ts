@@ -3,12 +3,12 @@ import { markPlayers } from "../src/marking/rows/markPlayers";
 import { markPokes } from "../src/marking/rows/markPokes";
 import { markRules } from "../src/marking/rows/markRules";
 import { markTurnZero } from "../src/marking/turns/markTurnZero";
-import { readGender } from "../src/functions/readGender";
+import { readMonFromPreview } from "../src/functions/readMonFromPreview";
 import { markSwitch } from "../src/marking/rows/markSwitch";
 import { markTurnOne } from "../src/marking/turns/markTurnOne";
 import { splitNicknameFromString } from "../src/functions/splitNicknameFromSwitch";
 import { markDamage } from "../src/marking/sublines/markDamage";
-import { sample_replay } from "./_sample";
+import { sample_replay } from "../tests/_sample";
 import { parseReplay } from "../src/parsers/parseReplay";
 import { markBoost } from "../src/marking/sublines/markBoost";
 
@@ -168,9 +168,9 @@ console.log(markRules(turnZero));
 // test: readGender
 // ---------------
 console.log(newSect("readGender"));
-console.log(readGender("Kommo-o, M"));
-console.log(readGender("Slurpuff, F"));
-console.log(readGender("Claydol"));
+console.log(readMonFromPreview("Kommo-o, M"));
+console.log(readMonFromPreview("Slurpuff, F"));
+console.log(readMonFromPreview("Claydol"));
 
 // ---------------
 // test: markPokes

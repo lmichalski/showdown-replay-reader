@@ -1,5 +1,5 @@
 import { log } from "handlebars";
-import { sample_replay } from "./_sample";
+import { sample_replay } from "../tests/_sample";
 import { parseCell } from "../src/parsers/parseCell";
 import { parseLine } from "../src/parsers/parseLine";
 import { parseLineBody } from "../src/parsers/parseLineBody";

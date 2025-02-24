@@ -1,4 +1,4 @@
-import { sample_replay } from "./_sample";
+import { sample_replay } from "../tests/_sample";
 import { parseReplay } from "../src/parsers/parseReplay";
 
 var parsedLog = parseReplay(sample_replay["log"]);
