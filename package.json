@@ -1,0 +1,24 @@
+{
+  "name": "showdown-replay-reader",
+  "version": "1.0.0",
+  "description": "parser and related functions for reading data from pokemon showdown replay",
+  "main": "index.js",
+  "directories": {
+    "test": "jest"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "showdown-replay-reader"
+  },
+  "author": "Lucas M",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.5"
+  }
+}
