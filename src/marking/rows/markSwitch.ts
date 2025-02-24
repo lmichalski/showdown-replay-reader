@@ -1,5 +1,5 @@
 import { Poke, ReplayLine } from "../../types";
-import { readGender } from "../../functions/readGender";
+import { readMonFromPreview } from "../../functions/readMonFromPreview";
 import { splitNicknameFromString } from "../../functions/splitNicknameFromSwitch";
 import { markSublines } from "../sublines/markSublines";
 
@@ -15,7 +15,7 @@ export const markSwitch: MarkSwitch = (line) => {
   }
 
   const { player, pokeNickname } = splitNicknameFromString(line["cells"][0]);
-  const { species, gender } = readGender(line["cells"][1]);
+  const { species, gender } = readMonFromPreview(line["cells"][1]);
   const health = line["cells"][2].split("/");
 
   if (health.length != 2) {

@@ -1,26 +1,16 @@
-import { Poke } from "../types";
-
-type ReadGender = (poke: string) => {
-  species: string;
-  gender: string;
-};
+type ReadGender = (s: string) => "male" | "female";
 
 export const readGender: ReadGender = (s) => {
-  const splitString = s.split(", ");
-
-  if (![1, 2, 3].includes(splitString.length)) {
-    throw new Error("string cannot be a Pokemon string: " + s);
+  if (s == "M") {
+    return "male";
   }
 
-  if (splitString.length == 1) {
-    return {
-      species: splitString[0],
-      gender: "none",
-    };
+  if (s == "F") {
+    return "female";
   }
 
-  return {
-    species: splitString[0],
-    gender: splitString[1],
-  };
+  throw new Error(
+    "String may be a real gender but in this instance we're talking about Pokemon and the only valid inputs are F/M. Input: " +
+      s
+  );
 };

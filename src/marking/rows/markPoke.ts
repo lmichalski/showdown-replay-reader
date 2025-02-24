@@ -1,5 +1,5 @@
 import { ReplayLine } from "../../types";
-import { readGender } from "../../functions/readGender";
+import { readMonFromPreview } from "../../functions/readMonFromPreview";
 import { splitNicknameFromString } from "../../functions/splitNicknameFromSwitch";
 
 type MarkPoke = (line: ReplayLine) => {
@@ -14,7 +14,7 @@ type MarkPoke = (line: ReplayLine) => {
 
 export const markPoke: MarkPoke = (line: ReplayLine) => {
   const player = line["cells"][0];
-  const { species, gender } = readGender(line["cells"][1]);
+  const { species, gender } = readMonFromPreview(line["cells"][1]);
 
   return {
     player: player,
