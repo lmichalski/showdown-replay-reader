@@ -1,50 +1,405 @@
 import { parseDelimeterToRest } from "./parsers/parseDelimeter";
+import { parseReplay } from "./parsers/parseReplay";
 
-var test = `
-Can you extract the questions asked in this article (point form) by CBC. Then summarize this article from CBC.
+const log = `|j|☆Glumlee
+|j|☆2n2plus
+|t:|1721091573
+|gametype|singles
+|player|p1|Glumlee|wattson|
+|player|p2|2n2plus|doubleteam|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|9
+|tier|[Gen 9] Tera Preview NatDex Draft
+|rule|Tera Type Preview: Tera Types are shown at Team Preview
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Clause: Evasion abilities, items, and moves are banned
+|rule|Evasion Abilities Clause: Evasion abilities are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|clearpoke
+|poke|p1|Gouging Fire|
+|poke|p1|Goodra-Hisui, M|
+|poke|p1|Blastoise, F|
+|poke|p1|Sylveon, M|
+|poke|p1|Venusaur, F|
+|poke|p1|Azelf|
+|poke|p2|Kommo-o, M|
+|poke|p2|Slurpuff, F|
+|poke|p2|Claydol|
+|poke|p2|Samurott-Hisui, M|
+|poke|p2|Victini|
+|poke|p2|Scizor, F|
+|teampreview
+|raw|Glumlee's Tera Types:<br /><psicon pokemon="gougingfire" /><psicon type="Fire" /> / <psicon pokemon="goodrahisui" /><psicon type="Steel" /> / <psicon pokemon="blastoise" /><psicon type="Water" /> / <psicon pokemon="sylveon" /><psicon type="Fairy" /> / <psicon pokemon="venusaur" /><psicon type="Grass" /> / <psicon pokemon="azelf" /><psicon type="Psychic" />
+|raw|2n2plus's Tera Types:<br /><psicon pokemon="kommoo" /><psicon type="Dragon" /> / <psicon pokemon="slurpuff" /><psicon type="Fire" /> / <psicon pokemon="claydol" /><psicon type="Steel" /> / <psicon pokemon="samurotthisui" /><psicon type="Water" /> / <psicon pokemon="victini" /><psicon type="Psychic" /> / <psicon pokemon="scizor" /><psicon type="Bug" />
+|j| NBA Leezey
+|c| NBA Leezey|content time
+|j| night triumphant
+|j| Fennekmaster
+|j| izayaforpresident
+|j| TransFlutterMane
+|
+|t:|1721091619
+|start
+|switch|p1a: Azelf|Azelf|100/100
+|switch|p2a: Kill Bill|Samurott-Hisui, M|100/100
+|turn|1
+|
+|t:|1721091629
+|move|p1a: Azelf|Stealth Rock|p2a: Kill Bill
+|-sidestart|p2: 2n2plus|move: Stealth Rock
+|move|p2a: Kill Bill|Ceaseless Edge|p1a: Azelf
+|-supereffective|p1a: Azelf
+|-enditem|p1a: Azelf|Focus Sash
+|-damage|p1a: Azelf|1/100
+|-sidestart|p1: Glumlee|Spikes
+|
+|upkeep
+|turn|2
+|
+|t:|1721091635
+|move|p2a: Kill Bill|Aqua Jet|p1a: Azelf
+|-damage|p1a: Azelf|0 fnt
+|faint|p1a: Azelf
+|
+|upkeep
+|
+|t:|1721091651
+|switch|p1a: Venusaur|Venusaur, F|100/100
+|-damage|p1a: Venusaur|88/100|[from] Spikes
+|turn|3
+|c| Fennekmaster|sammy kill
+|
+|t:|1721091676
+|move|p2a: Kill Bill|Swords Dance|p2a: Kill Bill
+|-boost|p2a: Kill Bill|atk|2
+|move|p1a: Venusaur|Sunny Day|p1a: Venusaur
+|-weather|SunnyDay
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|4
+|
+|t:|1721091680
+|move|p1a: Venusaur|Sleep Powder|p2a: Kill Bill
+|-status|p2a: Kill Bill|slp|[from] move: Sleep Powder
+|cant|p2a: Kill Bill|slp
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|5
+|c| TransFlutterMane|heat??
+|c| NBA Leezey|:o
+|c|☆2n2plus|good set
+|j| LethalBlue
+|c| Fennekmaster|:fire:
+|
+|t:|1721091747
+|switch|p2a: Shogun|Kommo-o, M|100/100
+|-damage|p2a: Shogun|94/100|[from] Stealth Rock
+|move|p1a: Venusaur|Earth Power|p2a: Shogun
+|-damage|p2a: Shogun|64/100
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|6
+|
+|t:|1721091783
+|switch|p2a: Eyes Wide Shut|Claydol|100/100
+|-damage|p2a: Eyes Wide Shut|94/100|[from] Stealth Rock
+|move|p1a: Venusaur|Sleep Powder|p2a: Eyes Wide Shut
+|-message|Sleep Clause Mod activated.
+|-hint|Sleep Clause Mod prevents players from putting more than one of their opponent's Pokémon to sleep at a time
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|7
+|c|☆Glumlee|oh yeah
+|
+|t:|1721091793
+|move|p1a: Venusaur|Weather Ball|p2a: Eyes Wide Shut
+|-damage|p2a: Eyes Wide Shut|55/100
+|move|p2a: Eyes Wide Shut|Light Screen|p2a: Eyes Wide Shut
+|-sidestart|p2: 2n2plus|move: Light Screen
+|
+|-weather|none
+|upkeep
+|turn|8
+|c| TransFlutterMane|lmao
+|c| NBA Leezey|LOL
+|
+|t:|1721091810
+|switch|p1a: Blastoise|Blastoise, F|100/100
+|-damage|p1a: Blastoise|88/100|[from] Spikes
+|move|p2a: Eyes Wide Shut|Reflect|p2a: Eyes Wide Shut
+|-sidestart|p2: 2n2plus|Reflect
+|
+|upkeep
+|turn|9
+|
+|t:|1721091816
+|move|p2a: Eyes Wide Shut|Toxic|p1a: Blastoise|[miss]
+|-miss|p2a: Eyes Wide Shut|p1a: Blastoise
+|move|p1a: Blastoise|Rapid Spin|p2a: Eyes Wide Shut
+|-damage|p2a: Eyes Wide Shut|50/100
+|-boost|p1a: Blastoise|spe|1
+|-sideend|p1: Glumlee|Spikes|[from] move: Rapid Spin|[of] p1a: Blastoise
+|
+|upkeep
+|turn|10
+|
+|t:|1721091822
+|move|p1a: Blastoise|Scald|p2a: Eyes Wide Shut
+|-supereffective|p2a: Eyes Wide Shut
+|-damage|p2a: Eyes Wide Shut|29/100
+|move|p2a: Eyes Wide Shut|Rapid Spin|p1a: Blastoise
+|-damage|p1a: Blastoise|82/100
+|-boost|p2a: Eyes Wide Shut|spe|1
+|-damage|p2a: Eyes Wide Shut|12/100|[from] item: Rocky Helmet|[of] p1a: Blastoise
+|-sideend|p2: 2n2plus|Stealth Rock|[from] move: Rapid Spin|[of] p2a: Eyes Wide Shut
+|
+|upkeep
+|turn|11
+|
+|t:|1721091827
+|move|p2a: Eyes Wide Shut|Toxic|p1a: Blastoise
+|-status|p1a: Blastoise|tox
+|move|p1a: Blastoise|Scald|p2a: Eyes Wide Shut
+|-supereffective|p2a: Eyes Wide Shut
+|-damage|p2a: Eyes Wide Shut|0 fnt
+|faint|p2a: Eyes Wide Shut
+|
+|-damage|p1a: Blastoise|76/100 tox|[from] psn
+|upkeep
+|
+|t:|1721091842
+|switch|p2a: Vendetta|Victini|100/100
+|turn|12
+|c| Fennekmaster|its tini
+|
+|t:|1721091864
+|move|p2a: Vendetta|Flame Charge|p1a: Blastoise
+|-resisted|p1a: Blastoise
+|-crit|p1a: Blastoise
+|-damage|p1a: Blastoise|68/100 tox
+|-boost|p2a: Vendetta|spe|1
+|-damage|p2a: Vendetta|84/100|[from] item: Rocky Helmet|[of] p1a: Blastoise
+|move|p1a: Blastoise|Flip Turn|p2a: Vendetta
+|-supereffective|p2a: Vendetta
+|-damage|p2a: Vendetta|66/100
+|-enditem|p2a: Vendetta|Weakness Policy
+|-boost|p2a: Vendetta|atk|2|[from] item: Weakness Policy
+|-boost|p2a: Vendetta|spa|2|[from] item: Weakness Policy
+|c| TransFlutterMane|tini wini
+|c| TransFlutterMane|hol up
+|c| Fennekmaster|ngl i saw that coming lol
+|
+|t:|1721091950
+|switch|p1a: Venusaur|Venusaur, F|88/100|[from] Flip Turn
+|
+|upkeep
+|turn|13
+|
+|t:|1721091956
+|detailschange|p1a: Venusaur|Venusaur-Mega, F
+|-mega|p1a: Venusaur|Venusaur|Venusaurite
+|move|p2a: Vendetta|Psychic|p1a: Venusaur
+|-supereffective|p1a: Venusaur
+|-damage|p1a: Venusaur|0 fnt
+|faint|p1a: Venusaur
+|
+|upkeep
+|l| LethalBlue
+|
+|t:|1721091962
+|switch|p1a: Goodra|Goodra-Hisui, M|100/100
+|turn|14
+|
+|t:|1721092000
+|move|p2a: Vendetta|Blue Flare|p1a: Goodra
+|-damage|p1a: Goodra|43/100
+|-status|p1a: Goodra|brn
+|move|p1a: Goodra|Thunderbolt|p2a: Vendetta
+|-damage|p2a: Vendetta|52/100
+|
+|-damage|p1a: Goodra|37/100 brn|[from] brn
+|-sideend|p2: 2n2plus|move: Light Screen
+|upkeep
+|turn|15
+|
+|t:|1721092008
+|move|p2a: Vendetta|Blue Flare|p1a: Goodra
+|-damage|p1a: Goodra|0 fnt
+|faint|p1a: Goodra
+|
+|-sideend|p2: 2n2plus|Reflect
+|upkeep
+|
+|t:|1721092022
+|switch|p1a: Gouging Fire|Gouging Fire|100/100
+|turn|16
+|
+|t:|1721092082
+|move|p2a: Vendetta|Psychic|p1a: Gouging Fire
+|-damage|p1a: Gouging Fire|19/100
+|-unboost|p1a: Gouging Fire|spd|1
+|move|p1a: Gouging Fire|Earthquake|p2a: Vendetta
+|-supereffective|p2a: Vendetta
+|-damage|p2a: Vendetta|0 fnt
+|faint|p2a: Vendetta
+|
+|upkeep
+|c| Fennekmaster|tini wini
+|
+|t:|1721092109
+|switch|p2a: Despicable Me|Slurpuff, F, shiny|100/100
+|turn|17
+|
+|t:|1721092125
+|-end|p1a: Gouging Fire|Protosynthesis|[silent]
+|switch|p1a: Sylveon|Sylveon, M|100/100
+|move|p2a: Despicable Me|Cotton Guard|p2a: Despicable Me
+|-boost|p2a: Despicable Me|def|3
+|
+|upkeep
+|turn|18
+|
+|t:|1721092132
+|-terastallize|p2a: Despicable Me|Fire
+|move|p2a: Despicable Me|Calm Mind|p2a: Despicable Me
+|-boost|p2a: Despicable Me|spa|1
+|-boost|p2a: Despicable Me|spd|1
+|move|p1a: Sylveon|Moonblast|p2a: Despicable Me
+|-resisted|p2a: Despicable Me
+|-damage|p2a: Despicable Me|80/100
+|
+|upkeep
+|turn|19
+|
+|t:|1721092138
+|move|p2a: Despicable Me|Calm Mind|p2a: Despicable Me
+|-boost|p2a: Despicable Me|spa|1
+|-boost|p2a: Despicable Me|spd|1
+|move|p1a: Sylveon|Baton Pass|p1a: Sylveon
+|
+|t:|1721092140
+|switch|p1a: Blastoise|Blastoise, F|68/100 tox|[from] Baton Pass
+|
+|-damage|p1a: Blastoise|62/100 tox|[from] psn
+|upkeep
+|turn|20
+|c| Fennekmaster|oh shit
+|
+|t:|1721092145
+|move|p2a: Despicable Me|Draining Kiss|p1a: Blastoise
+|-damage|p1a: Blastoise|30/100 tox
+|-heal|p2a: Despicable Me|100/100|[from] drain|[of] p1a: Blastoise
+|-damage|p2a: Despicable Me|84/100|[from] item: Rocky Helmet|[of] p1a: Blastoise
+|move|p1a: Blastoise|Haze|p1a: Blastoise
+|-clearallboost
+|
+|-damage|p1a: Blastoise|18/100 tox|[from] psn
+|upkeep
+|turn|21
+|
+|t:|1721092167
+|switch|p2a: Shogun|Kommo-o, M|64/100
+|switch|p1a: Sylveon|Sylveon, M|100/100
+|
+|upkeep
+|turn|22
+|
+|t:|1721092172
+|move|p2a: Shogun|Iron Head|p1a: Sylveon
+|-supereffective|p1a: Sylveon
+|-enditem|p1a: Sylveon|Babiri Berry|[eat]
+|-enditem|p1a: Sylveon|Babiri Berry|[weaken]
+|-damage|p1a: Sylveon|73/100
+|move|p1a: Sylveon|Wish|p1a: Sylveon
+|
+|upkeep
+|turn|23
+|
+|t:|1721092185
+|move|p2a: Shogun|Iron Head|p1a: Sylveon
+|-supereffective|p1a: Sylveon
+|-damage|p1a: Sylveon|14/100
+|cant|p1a: Sylveon|flinch
+|
+|-heal|p1a: Sylveon|64/100|[from] move: Wish|[wisher] Sylveon
+|upkeep
+|turn|24
+|c|☆Glumlee|come on
+|
+|t:|1721092203
+|move|p2a: Shogun|Iron Head|p1a: Sylveon
+|-supereffective|p1a: Sylveon
+|-damage|p1a: Sylveon|1/100
+|move|p1a: Sylveon|Wish|p1a: Sylveon
+|
+|upkeep
+|turn|25
+|
+|t:|1721092211
+|switch|p1a: Gouging Fire|Gouging Fire|19/100
+|move|p2a: Shogun|Drain Punch|p1a: Gouging Fire
+|-damage|p1a: Gouging Fire|0 fnt
+|-heal|p2a: Shogun|75/100|[from] drain|[of] p1a: Gouging Fire
+|faint|p1a: Gouging Fire
+|-end|p1a: Gouging Fire|Protosynthesis|[silent]
+|
+|upkeep
+|c|☆Glumlee|gg
+|
+|t:|1721092221
+|switch|p1a: Blastoise|Blastoise, F|18/100 tox
+|turn|26
+|c| TransFlutterMane|will we ever learn this kommo-o's ability
+|c|☆2n2plus|gg
+|
+|t:|1721092226
+|move|p2a: Shogun|Drain Punch|p1a: Blastoise
+|-damage|p1a: Blastoise|0 fnt
+|-heal|p2a: Shogun|86/100|[from] drain|[of] p1a: Blastoise
+|-damage|p2a: Shogun|69/100|[from] item: Rocky Helmet|[of] p1a: Blastoise
+|faint|p1a: Blastoise
+|
+|upkeep
+|
+|t:|1721092227
+|switch|p1a: Sylveon|Sylveon, M|1/100
+|turn|27
+|
+|t:|1721092229
+|move|p2a: Shogun|Iron Head|p1a: Sylveon
+|-supereffective|p1a: Sylveon
+|-damage|p1a: Sylveon|0 fnt
+|faint|p1a: Sylveon
+|
+|win|2n2plus
+|c|☆Glumlee|!showteam
+|c| Glumlee|/raw <div class="infobox"><details><summary>View team</summary>Gouging Fire @ Heavy-Duty Boots  <br />Ability: Protosynthesis  <br />Hidden Power: Fighting  <br />Tera Type: Fire  <br />EVs: 252 Atk &#x2f; 36 SpD &#x2f; 220 Spe  <br />Adamant Nature  <br />- Heat Crash  <br />- Dragon Claw  <br />- Dragon Dance  <br />- Earthquake  <br /><br />Goodra (Goodra-Hisui) (M) @ Assault Vest  <br />Ability: Gooey  <br />Tera Type: Steel  <br />EVs: 248 HP &#x2f; 44 Def &#x2f; 216 SpA  <br />Modest Nature  <br />IVs: 0 Atk  <br />- Thunderbolt  <br />- Draco Meteor  <br />- Chilling Water  <br />- Flamethrower  <br /><br />Blastoise (F) @ Rocky Helmet  <br />Ability: Torrent  <br />Tera Type: Water  <br />EVs: 252 HP &#x2f; 252 Def &#x2f; 4 SpD  <br />Relaxed Nature  <br />- Flip Turn  <br />- Rapid Spin  <br />- Scald  <br />- Haze  <br /><br />Sylveon (M) @ Babiri Berry  <br />Ability: Cute Charm  <br />Tera Type: Fairy  <br />EVs: 248 HP &#x2f; 44 Def &#x2f; 216 SpA  <br />Modest Nature  <br />IVs: 0 Atk  <br />- Moonblast  <br />- Baton Pass  <br />- Mystical Fire  <br />- Wish  <br /><br />Venusaur (F) @ Venusaurite  <br />Ability: Chlorophyll  <br />Tera Type: Grass  <br />EVs: 52 HP &#x2f; 252 SpA &#x2f; 204 Spe  <br />Modest Nature  <br />IVs: 0 Atk  <br />- Sunny Day  <br />- Weather Ball  <br />- Sleep Powder  <br />- Earth Power  <br /><br />Azelf @ Focus Sash  <br />Ability: Levitate  <br />Tera Type: Psychic  <br />EVs: 252 Atk &#x2f; 4 SpD &#x2f; 252 Spe  <br />Adamant Nature  <br />- Stealth Rock  <br />- Explosion  <br />- Thunder Wave  <br />- Taunt  <br /><br /></details></div>
+|l| NBA Leezey
+|c|☆2n2plus|!showteam
+|c| 2n2plus|/raw <div class="infobox"><details><summary>View team</summary>Shogun (Kommo-o) (M) @ Salac Berry  <br />Ability: Soundproof  <br />Tera Type: Dragon  <br />EVs: 4 HP &#x2f; 252 Atk &#x2f; 252 Spe  <br />Jolly Nature  <br />- Belly Drum  <br />- Drain Punch  <br />- Iron Head  <br />- Substitute  <br /><br />Despicable Me (Slurpuff) (F) @ Iapapa Berry  <br />Ability: Unburden  <br />Shiny: Yes  <br />Tera Type: Fire  <br />EVs: 184 Def &#x2f; 116 SpA &#x2f; 208 Spe  <br />Bold Nature  <br />IVs: 0 Atk  <br />- Cotton Guard  <br />- Calm Mind  <br />- Draining Kiss  <br />- Psychic  <br /><br />Eyes Wide Shut (Claydol) @ Light Clay  <br />Ability: Levitate  <br />Tera Type: Steel  <br />EVs: 252 HP &#x2f; 252 Def &#x2f; 4 SpA  <br />Bold Nature  <br />- Reflect  <br />- Light Screen  <br />- Rapid Spin  <br />- Toxic  <br /><br />Kill Bill (Samurott-Hisui) (M) @ Focus Sash  <br />Ability: Sharpness  <br />Tera Type: Water  <br />EVs: 252 Atk &#x2f; 4 SpD &#x2f; 252 Spe  <br />Jolly Nature  <br />- Swords Dance  <br />- Ceaseless Edge  <br />- Sacred Sword  <br />- Aqua Jet  <br /><br />Vendetta (Victini) @ Weakness Policy  <br />Ability: Victory Star  <br />Tera Type: Psychic  <br />EVs: 252 SpA &#x2f; 4 SpD &#x2f; 252 Spe  <br />Modest Nature  <br />- Toxic  <br />- Blue Flare  <br />- Psychic  <br />- Flame Charge  <br /><br />Edward Scissor (Scizor) (F) @ Scizorite  <br />Ability: Technician  <br />Tera Type: Bug  <br />EVs: 248 HP &#x2f; 252 Atk &#x2f; 8 Def  <br />Adamant Nature  <br />- U-turn  <br />- Bullet Punch  <br />- Close Combat  <br />- Dual Wingbeat  <br /><br /></details></div>
+|l| night triumphant
+|l|☆Glumlee
+|player|p1|
+|c|☆2n2plus|THE FLINCH IS FOR MY BOY AZ
+|c|☆2n2plus|WE OUT HERE :GUN:`;
 
-Artificial intelligence needs to work with humans — not replace us: tech experts
-Don't buy all the hype — or hope — of AI, says tech writer Cory Doctorow
-With ChatGPT, writing anything from resumes to thank-you notes, to even wedding vows, is a measure of how much artificial intelligence has become part of everyday life for millions of people. 
-Advocates of AI see the technology as the potential answer to humanity's biggest problems. But skeptics warn AI could create lasting damage to our society — undermining education, eliminating jobs and perhaps civilization itself.
-Technology writer and author of The Internet Con: How to Seize the Means of Computation, Cory Doctorow doesn't buy all the hype — or hope — associated with AI.
-"The inevitabalism of technology going from 1 to 60, and then staying – sticking around forever. It's just not true… we discard technologies all the time, including technologies that people like, right?" 
-Doctorow joined Vass Bednar, executive director of the Master of Public Policy in Digital Society Program at McMaster University for a panel discussion about the promise and the perils of AI. The panel was moderated by IDEAS host Nahlah Ayed at the Provocation Ideas Festival in Stratford, Ontario in November, 2023.
-Here is an excerpt from their conversation.
-So what does it mean when we say that we're building machines that are smarter than we are? What does it mean for a machine to be smarter than a human being?  
-CD: I think it means someone's lying, because given that we don't have a working definition of what smart means… you know, describing the computer as more spiritual than you or smarter than you or any other adjective that we don't have a good empirical definition for is like an intrinsically unfalsifiable statement.
-Saying that we have a machine that can automate things, that can spot things that humans can't spot, that can work with a human as a kind of partner to catch things that humans miss, that's fine. But remember when they say, 'Oh, we've got an algorithm that catches some of the mistakes that radiologists make when they look at your lung X-rays,' what they don't mean is the radiologist is going to spend as much time as they ever did looking at lung X-rays, and they're going to get a second opinion from the algorithm which has different blind spots to the human, and they'll compare notes. And if it turns out that they don't agree, there will be one fewer X-ray looked at that day because the oncologist or the radiologist can go back and look at the X-ray again just to resolve that disagreement.
-Nobody is investing in AI in the hopes that radiologists will spend more money looking at X-rays than they do today. They're investing in AI in the hopes that they will fire half the radiologists and double the rate at which they look at X-rays. And I think that when you add up all of the consequential things that AI wants to automate in which they are both consequential and error-sensitive, such that you might be able to improve the outcome of the system by twinning or by pairing a human with AI, that the two of them work together with no cost savings, but an improvement in quality and in reliability, and you take those out because there's just no market for that stuff — what you're left with is a very small number of applications for AI.
-I have to admit a great amount of ignorance as to what is or isn't possible with artificial intelligence. I listened to a show recently where they talk about ChatGPT 4, which some researchers suggest can actually reason, can internalize an instruction to draw a unicorn when it's never seen a unicorn, or is able to pass the Turing test. Or the LSAT. How do I situate that in what you just said, Cory? 
-CD: Well, okay, so if it turns out that the standard test that we give to lawyers is something that a chatbot can answer, maybe we're not assessing our lawyers very well, right? In fact, I would fully support the idea that any assessment that we use to measure the merit of a human that a chatbot can outperform should be scrapped as a measure, and we should go to better qualitative measures that may be harder to assess in bulk, but which would produce a better picture of what people's aptitudes and interests really are.
-I speak as a Canadian expatriate who lives in the United States and whose daughter is going through the Common Core curriculum, where about a third of her instruction hours are spent teaching her how to take standardized tests. So I think that we can agree that standardized assessment tools that began as a way to evaluate the conduct of education and where it could stand with improvement have become targets themselves. And there's a law, when a metric becomes a target, it ceases to be useful as either. 
-I think it's really cool that with statistical inference you can figure out what a unicorn should look like even if you've never heard of a unicorn. That's great. But I don't know that it tells you that there's something intelligent about it. I think it tells you something really interesting about what the limits of statistical inference are that is novel and cool and interesting philosophically. I just don't think that it justifies a mass retooling of society around inference engines that we know are prone to all sorts of gaffes and where every thought of a gaffe coming in is hand-waved away with this idea of humans in the loop.
-So Vass, help me understand then why pioneers in AI like Geoffrey Hinton or Yoshua Bengio as well as leading companies and researchers, have implored governments to regulate. What do their concerns, you know, boil down to when it comes to AI? 
-VB: I think we have this idea with artificial intelligence that if we regulate its production in a way that makes us all comfortable — we feel that it's ethical or moral or that it's being properly built, then we can worry a little bit less about the application side, right? Because we're kind of trying to have two conversations at once. How do we build and then how can we use this? 
-In terms of speaking to why AI pioneers are worried and sort of raising these flags, perhaps it's because it's their job to be ambitious and to dream about how this could be used or should be used and will be widely adopted. You mentioned large language models and us playing around with ChatGPT. I mean, is this not just mass user testing? We're sort of letting people play around and learn from models in what ends up being a race amongst the largest companies to have the dominant model and who are really kind of stuck in this cyclical kind of talent, circulation, poaching kind of people back and forth to build what is again, looking for efficiency. This idea we're going to do things if we do things faster, we're going to be able to do them better. If we just know a little bit more, we can make a slightly better prediction. And I think Cory's elements of complementing human work and human thinking is imperative. 
-CD: There have been lots of critics before this current AI bubble who worried about automation bias and algorithmic bias. And when they criticize AI, when they do what is often called AI ethics, what they're saying is AI is not very powerful, right? AI can make a bunch of bad decisions quickly, so quickly that maybe we can't assess them. But that is not a mark of the quality and power of AI. 
-Meanwhile, AI boosters who talk about AI safety as distinct from AI ethics, which boils down to someday the chatbot is going to wake up and turn us all into paperclips. What the subtext of what they're saying is, AI is so powerful that it needs to be regulated and if it's that powerful, it's probably very valuable as well, right? A tool that is this powerful will someday transform our whole economy in every single way. Your firm should be figuring out how to integrate AI into its processes. Governments should be finding lots of ways to encourage AI investment, giving tax breaks, creating a regulatory framework for it. 
-And of course, let's not forget that as important as regulation is that when a monopolist or would-be monopolist seeks regulation, the regulation they're often seeking is something that would prevent new entry. So the monopoly's first preference is usually not to be regulated at all, but their close second preference is 'regulate me in a way that only I and not my competitors can satisfy.' 
-Is there any government in the world that either of you know of that is actually leading on regulation, specifically where AI is concerned? 
-VB: Canada has tried to be fast in terms of defining when and how [we are] going to use artificial intelligence as a government. And I think that kind of rapid prototyping is important to have these statements and disclosure — how are we going to, who are we going to contract with on some of these issues. That's been very transparent. And it's almost like we're in an ideas competition because globally on what the frameworks should be, I use frameworks plural, but really because this stuff doesn't have a geography, we're sort of finding that kind of national, sub-national organizing principles don't work very well here. 
+var x = parseReplay(log);
 
+for (var i of x.head) {
+  console.log(i);
+}
 
-After that can you fix this summary that I wrote. There are a lot of mistakes:
-The articul "Artificial intelligents needs to work with humans — not replace us: tech experts" adresses the perspectivs of tech writer Cory Doctorow and Vass Bednar, executiv director of the Master of Public Policy in Digital Society Program at McMaster University, during a panel discushion at the Provocation Ideas Festival in November 2023. Doctorow expressed skepticism toward the pervasiv optimism surronding AI, highlightening concerns about its potential societal consequenses, job displacment, and the assumptio of its superiarity over humans. He emphesized the need for AI to complement human intelligens rather than replase it entirly. Additinally, Doctorow questioned the efficency of standardized assesments in mesuring human abilities if AI can outform humans on such tests. Bednar emphasised the importans of AI regulation and transparancy in its development and usage, mentioing Canada's effors in defining AI's goverment use. Overall, the panelists shared concerns about the ethicial and societal implicatons of unregulated AI advancment and the need for comprehensive frameworks to governe its development and application. The articul "Artificial intelligents needs to work with humans — not replace us: tech experts" adresses the perspectivs of tech writer Cory Doctorow and Vass Bednar, executiv director of the Master of Public Policy in Digital Society Program at McMaster University, during a panel discushion at the Provocation Ideas Festival in November 2023. Doctorow expressed skepticism toward the pervasiv optimism surronding AI, highlightening concerns about its potential societal consequenses, job displacment, and the assumptio of its superiarity over humans. He emphesized the need for AI to complement human intelligens rather than replase it entirly. Additinally, Doctorow questioned the efficency of standardized assesments in mesuring human abilities if AI can outform humans on such tests. Bednar emphasised the importans of AI regulation and transparancy in its development and usage, mentioing Canada's effors in defining AI's goverment use. Overall, the panelists shared concerns about the ethicial and societal implicatons of unregulated AI advancment and the need for comprehensive frameworks to governe its development and application. Additinally, Doctorow questioned the efficency of standardized assesments in mesuring human abilities if AI can outform humans on such tests. Bednar emphasised the importans of AI regulation and transparancy in its development and usage, mentioing Canada's effors in defining AI's goverment use.
-`;
+console.log(x.head[24].lines);
 
-var sentences = test.split(".");
-
-var questions = sentences.filter((sentence) => sentence.indexOf("?") != -1);
-
-console.log(sentences);
-console.log(questions);
-
-console.log(test.indexOf("?"));
-
-// Eye care	2,046.5	29.5	3.7
-// Ear care	228.5	19.8	0.0
-
-console.log(3.7 / 2);
-
-console.log((29.5 + 19.8) / 2);
+for (var j of x.head[24].lines) {
+  console.log(j);
+}
